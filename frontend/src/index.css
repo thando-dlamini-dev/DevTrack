@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-caramel-lite: #ce9178;
+  --color-caramel: #c5ab86;
+  --color-dark-green: #92c4a4;
+  --color-background: 0, 0, 0;
+  --color-sci-fi-orange: #ce611f;
+  --color-neon-yellow: #c6e500;
+  --color-neon-yellow-light: rgb(243, 243, 243);
+  --color-background-light: #f1f1f1;
+  --color-element: #e5e5e5;
+  --color-sci-fi-orange-dark: #ce611f;
+  --color-sci-fi-orange-light: rgb(255, 137, 4);
+}
+
+.clip-hexagon {
+  clip-path: polygon(5% 0%, 100% 0%, 100% 0%, 100% 95%, 95% 100%, 0% 100%, 0% 5%);
+}
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+  
+  background-color: rgb(243, 243, 243);
+}
+
+body {
+  @apply bg-background-light text-black transition-colors duration-300;
+}
+
+body.dark {
+  @apply bg-gray-900 text-white transition-colors duration-300;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px; /* Scrollbar width */
+}
+
+::-webkit-scrollbar-track {
+  background:rgb(217, 217, 217) /* Transparent background */
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.8); /* Slightly transparent white on hover */
+}
