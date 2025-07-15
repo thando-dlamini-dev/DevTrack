@@ -2,8 +2,7 @@ import passport from "passport";
 import { generateToken } from "../lib/passport.config.js";
 import { findOrCreateUser } from "../models/user.model.js";
 import getUseContributions from "../lib/octokit.config.js"
-import { cacheResult, fetchCachedResult } from "../lib/redis.config.js";
-
+import redis from "../lib/redis.config.js"
 // GitHub OAuth authentication
 export const githubAuth = passport.authenticate("github", {
   session: false,
@@ -94,7 +93,21 @@ export const fetchUserContributions = async (req, res) => {
       throw new Error("Login is required");
     }
 
-    const contributions = await getUseContributions(username);
+    const cacheKey = `github:${username}`
+
+    const isCached = await redis.get(cacheKey);
+
+    let contributions = null;
+ 
+    if(!isCached){
+      contributions = await getUseContributions(username);
+      console.log(`Logging contributions: ${contributions}`)
+      await redis.set(cacheKey, JSON.stringify(contributions))
+    }
+    else{
+      contributions = JSON.parse(isCached)
+    }
+
 
     console.log(`Fetched contribution data: ${contributions}`)
 
@@ -111,4 +124,3 @@ export const fetchUserContributions = async (req, res) => {
 
 }
 
-await cacheResult("name", "Nkosiyothando");

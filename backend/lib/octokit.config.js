@@ -19,6 +19,7 @@ const getUserContributions = async (username) => {
 
     console.log(`Recent contributions by ${username}:`);
     console.log(contributions);
+    return contributions
   } catch (error) {
     console.error("Error fetching contributions:", error);
   }

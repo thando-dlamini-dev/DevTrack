@@ -1,4 +1,3 @@
-import { createClient } from 'redis';
 import { Redis } from '@upstash/redis'
 
 const redis = new Redis({
